@@ -1,6 +1,18 @@
+import { success } from "zod"
+
 export const errorMiddleware = (err,req,res,next)=>{
      console.log(err.message)
-    res.status(err.status || 500)
+   
+   if(err.name === "ZodError"){
+    return res.status(400).json({
+        success:false,
+        // errors:err.issues.map(e=>e.message)
+         errors:err.issues
+    })
+   }
+   
+   
+     res.status(err.status || 500)
     .json({
         status:err.status || 500,
         message: err.message || 'Internal Server Error'

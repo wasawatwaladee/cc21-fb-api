@@ -1,5 +1,22 @@
+GET  http://localhost:8899/api/shutdown
+###
 GET http://localhost:8899/api/xxx
 ###
+
+# Register api
+POST http://localhost:8899/api/auth/register HTTP/1.1
+content-type: application/json
+
+{
+ #"identity" : "1234567890", //# = comment
+ "identity" : "someone4@ggg.mail",
+ "firstName" : "someone",
+ "lastName" : "codecamp",
+ "password" : "123456",
+ "confirmPassword" : "123456"
+}
+###
+
 
 GET http://localhost:8899/api/auth
 ###
