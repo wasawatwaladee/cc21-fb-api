@@ -4,8 +4,14 @@ import { errorMiddleware } from "./middlewares/error.middleware.js";
 import { notFoundMiddleware } from "./middlewares/notFound.middleware.js";
 import shutdownUtil from "./utils/shutdown.util.js";
 import prisma from "./config/prisma.config.js";
+import cors from 'cors'
 
 const app = express();
+app.use(cors({
+    origin: ["http://localhost:5173"], //allow origins
+    methods:["GET","POST","PUT","DELETE"],
+    credentials:true, //allow all cookies if needed
+}))
 app.use(express.json());
 
 // app.use('/api/shutdown',(req,res)=>{
