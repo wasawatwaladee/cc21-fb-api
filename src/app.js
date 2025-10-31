@@ -1,17 +1,27 @@
 import express from "express";
+import cors from 'cors'
+import helmet from "helmet";
+import morgan from "morgan";
+import rateLimit from "express-rate-limit";
 import authRoute from "./routes/auth.route.js";
 import { errorMiddleware } from "./middlewares/error.middleware.js";
 import { notFoundMiddleware } from "./middlewares/notFound.middleware.js";
 import shutdownUtil from "./utils/shutdown.util.js";
 import prisma from "./config/prisma.config.js";
-import cors from 'cors'
+
 
 const app = express();
+app.use(morgan("dev"));
+app.use(rateLimit({
+    windowMs:3*60*1000,  //id เดียวกัน ยิงเกิน 100 ทีภายใน 3 นาที
+    max:100
+}));
+app.use(helmet());
 app.use(cors({
     origin: ["http://localhost:5173"], //allow origins
     methods:["GET","POST","PUT","DELETE"],
     credentials:true, //allow all cookies if needed
-}))
+}));
 app.use(express.json());
 
 // app.use('/api/shutdown',(req,res)=>{
