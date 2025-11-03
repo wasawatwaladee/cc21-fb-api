@@ -20,7 +20,7 @@ export const register = async (req, res, next) => {
  const newUser = {...user,password:await bcrypt.hash(password,10)}
  const result = await createUser(newUser)
  res.json({
-   msg: 'Register Successful',
+   message: 'Register Successful',
    result: result
  })
 }
@@ -47,7 +47,7 @@ const identityKey = user.email ? 'email' : 'mobile'
  })
  const {password: pw, createdAt, updatedAt, ...userData} = foundUser
  res.json({
-   msg: 'Login Successful',
+   message: 'Login Successful',
    token: token,
    user : userData
  })

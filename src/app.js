@@ -8,12 +8,14 @@ import { errorMiddleware } from "./middlewares/error.middleware.js";
 import { notFoundMiddleware } from "./middlewares/notFound.middleware.js";
 import shutdownUtil from "./utils/shutdown.util.js";
 import prisma from "./config/prisma.config.js";
+import postRoute from "./routes/post.route.js";
+import authenticateMiddleware from "./middlewares/authenticate.middleware.js";
 
 
 const app = express();
 app.use(morgan("dev"));
 app.use(rateLimit({
-    windowMs:3*60*1000,  //id เดียวกัน ยิงเกิน 100 ทีภายใน 3 นาที
+    windowMs:1*60*1000,  //id เดียวกัน ยิงเกิน 100 ทีภายใน 3 นาที
     max:100
 }));
 app.use(helmet());
@@ -32,7 +34,7 @@ app.use(express.json());
 app.use('/api/auth',authRoute);
 // app.use('/api/auth/login',(req,res)=>{res.send(req.body.identity)})
 // app.use('/api/auth',(req,res)=>{res.send('auth service')})
-app.use('/api/post',(req,res)=>{res.send('post service')});
+app.use('/api/post',authenticateMiddleware,postRoute);
 app.use('/api/comment',(req,res)=>{res.send('comment service')});
 app.use('/api/like',(req,res)=>{res.send('like service')});
 

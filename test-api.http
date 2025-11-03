@@ -29,7 +29,7 @@ content-type: application/json
 
 {
  #"identity" : "andy4@mail.com",
- "identity" : "0861864848",
+ "identity" : "0123456789",
  "password" : "123456"
 }
 
@@ -38,5 +38,11 @@ content-type: application/json
 # Get me 
 GET  http://localhost:8899/api/auth/me
 Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTc2MTc5NjkxNywiZXhwIjoxNzYzMDkyOTE3fQ.jXOMforXs2wGZ3m-a0MEKrwuvtFV3HbP-ss82TWEo3A
+
+###
+
+# Get me
+GET  http://localhost:8899/api/post
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNzYyMTYyNDA5LCJleHAiOjE3NjM0NTg0MDl9.Lh-q4XaVTbYUL8lEolpv6JpOXF7QhU9i8czB3bM8mvs
 
 ###
