@@ -41,7 +41,7 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MT
 
 ###
 
-# Get me
+# Get all posts
 GET  http://localhost:8899/api/post
 Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNzYyMTYyNDA5LCJleHAiOjE3NjM0NTg0MDl9.Lh-q4XaVTbYUL8lEolpv6JpOXF7QhU9i8czB3bM8mvs
 

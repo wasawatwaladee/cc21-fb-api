@@ -1,3 +1,4 @@
+import createHttpError from "http-errors"
 import prisma from "../config/prisma.config.js"
 
 export const getAllPosts= async(req,res)=>{
@@ -6,7 +7,15 @@ export const getAllPosts= async(req,res)=>{
         include:{
             user:{select:{
                 firstName:true,lastName:true,profileImage:true
-            }}
+            }},
+            comments: {
+                include:{
+                    user:{select:{
+                      firstName:true,lastName:true,profileImage:true  
+                    }}
+                }
+            },
+            likes: true
         }
     })
     res.json({posts:result})
@@ -22,4 +31,28 @@ export const createPost = async(req , res ,next)=>{
         message:'Create new Post done',
         result
         })
+}
+
+export const deletePost = async(req,res,next)=>{
+   const {id} = req.params
+
+   const foundPost = await prisma.post.findUnique({
+    where:{id: Number(id)}
+   })
+   if(!foundPost){
+    return next(createHttpError[404]("Data not found"))
+   }
+
+   if(req.user.id !== foundPost.userId){
+    return next(createHttpError[401]("Cannot delete this post"))
+   }
+
+   const result = await prisma.post.delete({
+    where:{id:Number(id)}
+   })
+
+   res.json({
+    message: "Delete done"
+   })
+
 }
